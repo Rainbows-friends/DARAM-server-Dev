@@ -76,5 +76,5 @@ production:
   front-url: ${FRONT_URL}
 server:
   servlet:
-    context-path: /api/v2
+    context-path: /dev-server/daram
   port: ${PORT:52308}
