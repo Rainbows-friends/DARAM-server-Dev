@@ -16,6 +16,7 @@ ci | CI/CD 파이프라인에 변화가 있을 때
 init | 프로젝트를 새로 시작했을 때
 pull | 단순히 브랜치 간의 병합으로 인한 커밋일 경우
 merge | PR을 머지할 때
+delete | 파일이나 코드, 로직을 제거했을 때
 
 Footer | Description
 --|--
