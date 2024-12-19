@@ -12,7 +12,7 @@ noArg {
 }
 
 group = "Rainbow_Friends"
-version = "0.0.1"
+version = "DEV"
 
 java {
     toolchain {
@@ -39,11 +39,11 @@ dependencies {
 
     // Database
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.redisson:redisson-spring-boot-starter:3.22.1")
-    implementation("org.springframework.boot:spring-boot-starter-jdbc")
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-    runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+    runtimeOnly("org.mariadb.jdbc:mysql-connector-java")
+    runtimeOnly("com.mysql:mysql-connector-j")
 
     // Kotlin & Jackson
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -66,6 +66,7 @@ dependencies {
     implementation("com.google.api-client:google-api-client:1.34.0")
     implementation("com.google.oauth-client:google-oauth-client-jetty:1.34.1")
     implementation("com.google.http-client:google-http-client-gson:1.41.5")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 
     // JAVAX
     implementation("javax.servlet:javax.servlet-api:4.0.1")

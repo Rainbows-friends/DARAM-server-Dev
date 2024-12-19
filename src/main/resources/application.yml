@@ -1,11 +1,11 @@
 spring:
   application:
-    name: DARAM-server-V2
+    name: DARAM-server-Dev
   jackson:
     time-zone: Asia/Seoul
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:${DB_TYPE:mariadb}://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_SCHEMA:daram}?serverTimezone=KST
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:${DB_TYPE:mariadb}://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_SCHEMA:daram}?serverTimezone=Asia/Seoul
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:123456}
   jpa:
@@ -16,7 +16,7 @@ spring:
       hibernate:
         jdbc:
           batch_size: 50
-        dialect: org.hibernate.dialect.MariaDBDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
         order_updates: true
         default_batch_fetch_size: 100
         use_sql_comments: true
@@ -77,3 +77,4 @@ production:
 server:
   servlet:
     context-path: /api/v2
+  port: ${PORT:52308}

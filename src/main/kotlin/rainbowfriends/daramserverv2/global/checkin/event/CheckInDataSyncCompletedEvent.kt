@@ -1,3 +1,0 @@
-package rainbowfriends.daramserverv2.global.checkin.event
-
-class CheckInDataSyncCompletedEvent

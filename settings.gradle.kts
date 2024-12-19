@@ -1,1 +1,1 @@
-rootProject.name = "DARAM-server-V2"
+rootProject.name = "DARAM-server-Dev"
