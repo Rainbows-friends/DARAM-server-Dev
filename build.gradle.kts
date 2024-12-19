@@ -12,7 +12,7 @@ noArg {
 }
 
 group = "Rainbow_Friends"
-version = "DEV"
+version = "v.DEV"
 
 java {
     toolchain {
