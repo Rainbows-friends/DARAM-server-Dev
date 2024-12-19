@@ -23,10 +23,16 @@ class JwtFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        if(request.requestURI.startsWith("/api/v2/auth") || request.requestURI.startsWith("/api/v2/time") || request.requestURI.equals("/api/v2/actuator/health")) {
+        /*
+        if (request.requestURI.startsWith("/api/v2/auth") || request.requestURI.startsWith("/api/v2/time") || request.requestURI.equals(
+                "/api/v2/actuator/health"
+            )
+        ) {
             filterChain.doFilter(request, response)
             return
         }
+        */
+        if (devServerPermit(request, response, filterChain)) return
         val bearerToken = request.getHeader(AUTHORIZATION_HEADER)
         if (!StringUtils.hasText(bearerToken) || !bearerToken.startsWith(BEARER_PREFIX)) {
             setErrorResponse(response, "Missing or invalid Authorization header")
@@ -57,5 +63,10 @@ class JwtFilter(
     companion object {
         private const val AUTHORIZATION_HEADER = "Authorization"
         private const val BEARER_PREFIX = "Bearer "
+    }
+
+    private fun devServerPermit(hsrq: HttpServletRequest, hsrs: HttpServletResponse, fc: FilterChain): Boolean {
+        fc.doFilter(hsrq, hsrs)
+        return true
     }
 }
