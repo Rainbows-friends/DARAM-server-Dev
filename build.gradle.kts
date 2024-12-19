@@ -77,9 +77,6 @@ dependencies {
     // Thymeleaf Extras
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
 
-    // Development Only
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-
     // Performance Monitoring
     implementation("io.micrometer:micrometer-registry-prometheus")
 
