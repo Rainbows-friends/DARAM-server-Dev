@@ -42,7 +42,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.redisson:redisson-spring-boot-starter:3.22.1")
-    runtimeOnly("org.mariadb.jdbc:mysql-connector-java")
     runtimeOnly("com.mysql:mysql-connector-j")
 
     // Kotlin & Jackson
