@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import rainbowfriends.daramserverdev.domain.member.service.CurrentMemrberInqueryService
+import rainbowfriends.daramserverdev.domain.member.service.CurrentMemberInqueryService
 import rainbowfriends.daramserverdev.domain.member.service.MemberInqueryService
 
 @RestController
 @RequestMapping("/member")
 class MemberController(
     private val allMemberInqueryService: MemberInqueryService,
-    private val currentMemrberInqueryService: CurrentMemrberInqueryService
+    private val currentMemberInqueryService: CurrentMemberInqueryService
 ) {
     @GetMapping
     fun getAllMember(
@@ -25,5 +25,5 @@ class MemberController(
     ) = allMemberInqueryService.getAllMember(id, stay, floor, room, grade, classNum)
 
     @GetMapping("/current")
-    fun getCurrentMember(request: HttpServletRequest) = currentMemrberInqueryService.getCurrentMember(request)
+    fun getCurrentMember(request: HttpServletRequest) = currentMemberInqueryService.getCurrentMember(request)
 }

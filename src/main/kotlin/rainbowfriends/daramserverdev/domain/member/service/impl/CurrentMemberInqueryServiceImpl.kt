@@ -3,7 +3,7 @@ package rainbowfriends.daramserverdev.domain.member.service.impl
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Service
 import rainbowfriends.daramserverdev.domain.member.exception.MemberNotFoundException
-import rainbowfriends.daramserverdev.domain.member.service.CurrentMemrberInqueryService
+import rainbowfriends.daramserverdev.domain.member.service.CurrentMemberInqueryService
 import rainbowfriends.daramserverdev.global.member.component.FindMember
 import rainbowfriends.daramserverdev.global.member.dto.MemberDTO
 import rainbowfriends.daramserverdev.global.security.jwt.service.JwtTokenParserService
@@ -12,7 +12,7 @@ import rainbowfriends.daramserverdev.global.security.jwt.service.JwtTokenParserS
 class CurrentMemberInqueryServiceImpl(
     private val jwtTokenParserService: JwtTokenParserService,
     private val findMember: FindMember
-) : CurrentMemrberInqueryService {
+) : CurrentMemberInqueryService {
     override fun getCurrentMember(request: HttpServletRequest): MemberDTO {
         return findMember.findMemberByEmail(
             jwtTokenParserService.extractUserId(
