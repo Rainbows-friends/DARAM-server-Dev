@@ -55,8 +55,6 @@ logging:
     root: info
     org.springframework.security: debug
     org.springframework.web: info
-  file:
-    path: ./logs/application.log
 management:
   endpoint:
     health:
