@@ -1,4 +1,4 @@
-package rainbowfriends.daramserverdev.global.security.token.Impl
+package rainbowfriends.daramserverdev.global.security.token.impl
 
 import org.springframework.stereotype.Service
 import rainbowfriends.daramserverdev.global.member.enums.Roles
