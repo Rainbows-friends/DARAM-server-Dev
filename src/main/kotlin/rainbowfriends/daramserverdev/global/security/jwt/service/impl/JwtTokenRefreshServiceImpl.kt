@@ -9,6 +9,7 @@ import rainbowfriends.daramserverdev.global.security.exception.RegenerateTokenFa
 import rainbowfriends.daramserverdev.global.security.jwt.service.JwtTokenParserService
 import rainbowfriends.daramserverdev.global.security.jwt.service.JwtTokenRefreshService
 import rainbowfriends.daramserverdev.global.security.jwt.service.JwtTokenService
+import java.time.LocalDateTime
 import java.util.*
 
 @Service
@@ -31,11 +32,11 @@ class JwtTokenRefreshServiceImpl(
         return true
     }
 
-    override fun regenerateToken(userId: String, refreshToken: String): Pair<Pair<String, Date>, Pair<String, Date>> {
+    override fun regenerateToken(userId: String, refreshToken: String): Pair<Pair<String, LocalDateTime>, Pair<String, LocalDateTime>> {
         if (validateRefreshToken(refreshToken)) {
             val role: Roles = jwtTokenParserService.extractRole(refreshToken)
-            val newAccessToken: Pair<String, Date> = jwtTokenService.generateAccessToken(userId, role)
-            val newRefreshToken: Pair<String, Date> = jwtTokenService.generateRefreshToken(userId, role)
+            val newAccessToken: Pair<String, LocalDateTime> = jwtTokenService.generateAccessToken(userId, role)
+            val newRefreshToken: Pair<String, LocalDateTime> = jwtTokenService.generateRefreshToken(userId, role)
             redisUtil.delete(refreshToken)
             saveRefreshToken(userId, newRefreshToken.first)
             return Pair(

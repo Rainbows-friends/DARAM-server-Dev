@@ -8,6 +8,7 @@ import rainbowfriends.daramserverdev.domain.member.exception.MemberNotFoundExcep
 import rainbowfriends.daramserverdev.global.member.component.FindMember
 import rainbowfriends.daramserverdev.global.security.jwt.service.JwtTokenParserService
 import rainbowfriends.daramserverdev.global.security.jwt.service.JwtTokenRefreshService
+import java.time.LocalDateTime
 import java.util.*
 
 @Service
@@ -19,13 +20,13 @@ class ReissueServiceImpl(
     override fun reissue(refreshToken: String): SigninOrReissueResponse {
         if (jwtTokenRefreshService.validateRefreshToken(refreshToken)) {
             val userId: String = jwtTokenParserService.extractUserId(refreshToken)
-            val newRefreshToken: Pair<Pair<String, Date>, Pair<String, Date>> =
+            val newRefreshToken: Pair<Pair<String, LocalDateTime>, Pair<String, LocalDateTime>> =
                 jwtTokenRefreshService.regenerateToken(userId, refreshToken)
             return SigninOrReissueResponse(
                 accessToken = newRefreshToken.first.first,
                 refreshToken = newRefreshToken.second.first,
-                accessTokenExpiresIn = newRefreshToken.first.second.toInstant().toString(),
-                refreshTokenExpiresIn = newRefreshToken.second.second.toInstant().toString(),
+                accessTokenExpiresIn = newRefreshToken.first.second.toString(),
+                refreshTokenExpiresIn = newRefreshToken.second.second.toString(),
                 role = findMember.findMemberByEmail(userId)?.role
                     ?: throw MemberNotFoundException("Member Not Found")
             )
