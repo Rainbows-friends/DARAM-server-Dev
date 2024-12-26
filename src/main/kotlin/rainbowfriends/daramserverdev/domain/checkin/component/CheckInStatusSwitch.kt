@@ -2,6 +2,7 @@ package rainbowfriends.daramserverdev.domain.checkin.component
 
 import org.springframework.stereotype.Component
 import rainbowfriends.daramserverdev.domain.checkin.service.CheckInTransaction
+import rainbowfriends.daramserverdev.global.log.logger
 import rainbowfriends.daramserverdev.global.redis.redisson.util.DistributedLock
 import rainbowfriends.daramserverdev.global.util.ParseStudentId.parseStudentId
 import java.time.LocalDate
@@ -23,6 +24,7 @@ class CheckInStatusSwitch(
     private fun handleCheckInStatusSwitch(studentId: Short, date: LocalDate): Boolean {
         return try {
             val parsedStudentId = parseStudentId(studentId.toString())
+            logger().info("CheckInStatusSwitch: $parsedStudentId")
             val user = checkInTransaction.getMemberDto(parsedStudentId.first, parsedStudentId.second, parsedStudentId.third)
             val checkIn = checkInTransaction.getCheckInRecord(user, date)
             checkInTransaction.checkInDateModify(checkIn)

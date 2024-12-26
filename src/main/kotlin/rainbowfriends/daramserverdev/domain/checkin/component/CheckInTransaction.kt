@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import rainbowfriends.daramserverdev.global.checkin.entity.CheckIn
 import rainbowfriends.daramserverdev.global.checkin.repository.CheckInRepository
+import rainbowfriends.daramserverdev.global.log.logger
 import rainbowfriends.daramserverdev.global.member.dto.MemberDTO
 import rainbowfriends.daramserverdev.global.member.entity.Member
 import rainbowfriends.daramserverdev.global.member.repository.MemberRepository
@@ -30,6 +31,7 @@ class CheckInTransaction(
     @Transactional
     fun toggleCheckInStatus(checkIn: CheckIn) {
         checkIn.checkinStatus = !checkIn.checkinStatus
+        logger().info("${checkIn.user} checkInStatus: ${checkIn.checkinStatus}")
         checkInRepository.save(checkIn)
     }
 
