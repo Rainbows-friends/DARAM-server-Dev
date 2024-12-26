@@ -67,8 +67,8 @@ token:
   secret: ${TOKEN_SECRET}
 jwt:
   secret: ${JWT_SECRET}
-  access-token-validity: 3600
-  refresh-token-validity: 604800
+  access-token-validity: 600
+  refresh-token-validity: 1800
 production:
   url: ${PROD_URL}
   front-url: ${FRONT_URL}
