@@ -2,8 +2,8 @@ package rainbowfriends.daramserverdev.domain.member.service.impl
 
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Service
-import rainbowfriends.daramserverdev.domain.auth.exception.TokenNotFoundException
 import rainbowfriends.daramserverdev.domain.member.exception.MemberNotFoundException
+import rainbowfriends.daramserverdev.domain.member.exception.TokenNotFoundException
 import rainbowfriends.daramserverdev.domain.member.service.CurrentMemberInqueryService
 import rainbowfriends.daramserverdev.global.member.component.FindMember
 import rainbowfriends.daramserverdev.global.member.dto.MemberDTO

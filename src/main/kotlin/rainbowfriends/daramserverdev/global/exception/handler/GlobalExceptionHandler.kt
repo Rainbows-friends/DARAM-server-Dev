@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import rainbowfriends.daramserverdev.domain.auth.exception.*
 import rainbowfriends.daramserverdev.domain.member.exception.InvalidStudentIdException
 import rainbowfriends.daramserverdev.domain.member.exception.MemberNotFoundException
+import rainbowfriends.daramserverdev.domain.member.exception.TokenNotFoundException
 import rainbowfriends.daramserverdev.domain.notice.exception.DuplicateNoticeException
 import rainbowfriends.daramserverdev.domain.notice.exception.NoticeNotFoundException
 import rainbowfriends.daramserverdev.domain.notice.exception.PatchNoticeRequestException
@@ -23,7 +24,7 @@ class GlobalExceptionHandler {
 
     @Deprecated(message = "Exception handling for TokenService is deprecated")
     @ExceptionHandler(TokenFormatException::class)
-    fun handleTokenFormatException(ex: TokenFormatException): ResponseEntity<ErrorResponse> {
+    fun handleTokenFormatException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.UNAUTHORIZED.value(),
             message = "Token format is invalid",
@@ -33,7 +34,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidTokenFormatException::class)
-    fun handleInvalidTokenFormatException(ex: InvalidTokenFormatException): ResponseEntity<ErrorResponse> {
+    fun handleInvalidTokenFormatException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.UNAUTHORIZED.value(),
             message = "Token format is invalid",
@@ -43,7 +44,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ExpiredTokenException::class)
-    fun handleExpiredTokenException(ex: ExpiredTokenException): ResponseEntity<ErrorResponse> {
+    fun handleExpiredTokenException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.UNAUTHORIZED.value(),
             message = "Token is expired",
@@ -53,7 +54,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ExpiredRefreshTokenException::class)
-    fun handleExpiredRefreshTokenException(ex: ExpiredRefreshTokenException): ResponseEntity<ErrorResponse> {
+    fun handleExpiredRefreshTokenException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.UNAUTHORIZED.value(),
             message = "Refresh Token is expired",
@@ -63,7 +64,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidTokenException::class)
-    fun handleInvalidTokenException(ex: InvalidTokenException): ResponseEntity<ErrorResponse> {
+    fun handleInvalidTokenException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.UNAUTHORIZED.value(),
             message = "Token is invalid",
@@ -73,7 +74,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidRefreshTokenException::class)
-    fun handleInvalidRefreshTokenException(ex: InvalidRefreshTokenException): ResponseEntity<ErrorResponse> {
+    fun handleInvalidRefreshTokenException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.UNAUTHORIZED.value(),
             message = "Refresh Token is invalid",
@@ -84,7 +85,7 @@ class GlobalExceptionHandler {
 
     @Deprecated(message = "Exception handling for TokenService is deprecated")
     @ExceptionHandler(NoTokenException::class)
-    fun handleNoTokenException(ex: NoTokenException): ResponseEntity<ErrorResponse> {
+    fun handleNoTokenException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.UNAUTHORIZED.value(),
             message = "Token is not provided",
@@ -95,17 +96,17 @@ class GlobalExceptionHandler {
 
     @Deprecated(message = "Exception handling for TokenService is deprecated")
     @ExceptionHandler(TokenNotFoundException::class)
-    fun handleTokenNotFoundException(ex: TokenNotFoundException): ResponseEntity<ErrorResponse> {
+    fun handleTokenNotFoundException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
-            code = HttpStatus.UNAUTHORIZED.value(),
+            code = HttpStatus.BAD_REQUEST.value(),
             message = "Token is not found",
             status = ErrorStatus.ERROR
         )
-        return ResponseEntity(errorResponse, HttpStatus.UNAUTHORIZED)
+        return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
     }
 
     @ExceptionHandler(DuplicateNoticeException::class)
-    fun handleDuplicateNoticeException(ex: DuplicateNoticeException): ResponseEntity<ErrorResponse> {
+    fun handleDuplicateNoticeException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.BAD_REQUEST.value(),
             message = "Notice is already exist",
@@ -115,7 +116,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidKeyException::class)
-    fun handleInvalidKeyException(ex: InvalidKeyException): ResponseEntity<ErrorResponse> {
+    fun handleInvalidKeyException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.UNAUTHORIZED.value(),
             message = "Invalid key",
@@ -125,7 +126,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MemberNotFoundException::class)
-    fun handleMemberNotFoundException(ex: MemberNotFoundException): ResponseEntity<ErrorResponse> {
+    fun handleMemberNotFoundException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.NOT_FOUND.value(),
             message = "Member is not found",
@@ -135,7 +136,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DateCalculationException::class)
-    fun handleDateCalculationException(ex: DateCalculationException): ResponseEntity<ErrorResponse> {
+    fun handleDateCalculationException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.INTERNAL_SERVER_ERROR.value(),
             message = "Date calculation failed",
@@ -145,7 +146,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidStudentIdException::class)
-    fun handleInvalidStudentIdException(ex: InvalidStudentIdException): ResponseEntity<ErrorResponse> {
+    fun handleInvalidStudentIdException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.INTERNAL_SERVER_ERROR.value(),
             message = "Invalid student id",
@@ -155,7 +156,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(LateNumberRaiseFailException::class)
-    fun handleLateNumberRaiseFailException(ex: LateNumberRaiseFailException): ResponseEntity<ErrorResponse> {
+    fun handleLateNumberRaiseFailException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.INTERNAL_SERVER_ERROR.value(),
             message = "Late number raise fail",
@@ -165,7 +166,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(CheckInStatusSwitchException::class)
-    fun handleCheckInStatusSwitchException(ex: CheckInStatusSwitchException): ResponseEntity<ErrorResponse> {
+    fun handleCheckInStatusSwitchException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.INTERNAL_SERVER_ERROR.value(),
             message = "CheckIn status switch failed",
@@ -175,7 +176,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(PatchNoticeRequestException::class)
-    fun handlePatchNoticeRequestException(ex: PatchNoticeRequestException): ResponseEntity<ErrorResponse> {
+    fun handlePatchNoticeRequestException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.BAD_REQUEST.value(),
             message = "Patch Notice Request is invalid",
@@ -185,7 +186,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoticeNotFoundException::class)
-    fun handleNoticeNotFoundException(ex: NoticeNotFoundException): ResponseEntity<ErrorResponse> {
+    fun handleNoticeNotFoundException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.NOT_FOUND.value(),
             message = "Notice is not found",
@@ -195,7 +196,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(EmailFormatException::class)
-    fun handleEmailFormatException(ex: EmailFormatException): ResponseEntity<ErrorResponse> {
+    fun handleEmailFormatException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.BAD_REQUEST.value(),
             message = "Email format is invalid",
@@ -205,7 +206,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidCodeException::class)
-    fun handleInvalidCodeException(ex: InvalidCodeException): ResponseEntity<ErrorResponse> {
+    fun handleInvalidCodeException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.BAD_REQUEST.value(),
             message = "Invalid code",
@@ -215,7 +216,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ReissueTokenException::class)
-    fun handleReissueTokenException(ex: ReissueTokenException): ResponseEntity<ErrorResponse> {
+    fun handleReissueTokenException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.UNAUTHORIZED.value(),
             message = "Reissue Token is invalid",
@@ -225,7 +226,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(RegenerateTokenFailedException::class)
-    fun handleRegenerateTokenFailedException(ex: RegenerateTokenFailedException): ResponseEntity<ErrorResponse> {
+    fun handleRegenerateTokenFailedException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.INTERNAL_SERVER_ERROR.value(),
             message = "Regenerate Failed",
@@ -235,7 +236,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(KeyNotFoundException::class)
-    fun handleKeyNotFoundException(ex: KeyNotFoundException): ResponseEntity<ErrorResponse> {
+    fun handleKeyNotFoundException(): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse(
             code = HttpStatus.UNAUTHORIZED.value(),
             message = "Key is invalid",
