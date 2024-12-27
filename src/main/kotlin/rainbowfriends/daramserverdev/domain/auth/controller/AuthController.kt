@@ -8,11 +8,7 @@ import rainbowfriends.daramserverdev.domain.auth.dto.request.CameraAuthorization
 import rainbowfriends.daramserverdev.domain.auth.dto.request.ReissueRequest
 import rainbowfriends.daramserverdev.domain.auth.dto.request.SignInRequest
 import rainbowfriends.daramserverdev.domain.auth.dto.response.SigninOrReissueResponse
-import rainbowfriends.daramserverdev.domain.auth.service.AdminAuthorizationService
-import rainbowfriends.daramserverdev.domain.auth.service.CameraAuthorizationService
-import rainbowfriends.daramserverdev.domain.auth.service.LogoutService
-import rainbowfriends.daramserverdev.domain.auth.service.ReissueService
-import rainbowfriends.daramserverdev.domain.auth.service.SignInService
+import rainbowfriends.daramserverdev.domain.auth.service.*
 import rainbowfriends.daramserverdev.global.security.dto.TokenResponse
 
 @RequestMapping("/auth")
@@ -22,7 +18,8 @@ class AuthController(
     private val logoutService: LogoutService,
     private val signInService: SignInService,
     private val cameraAuthorizationService: CameraAuthorizationService,
-    private val reissueService: ReissueService
+    private val reissueService: ReissueService,
+    private val validateTokenService: ValidateTokenService
 ) {
     @PostMapping
     @Deprecated(message = "Google OAuth2 Authorization use")
@@ -50,5 +47,10 @@ class AuthController(
     @PutMapping("/refresh")
     fun reissue(@RequestBody refreshToken: ReissueRequest): SigninOrReissueResponse {
         return reissueService.reissue(refreshToken.refreshToken)
+    }
+
+    @GetMapping("/token/validate")
+    fun validateToken(@RequestHeader("Authorization") authorization: String): Boolean {
+        return validateTokenService.validateToken(authorization.removePrefix("Bearer ").trim())
     }
 }
