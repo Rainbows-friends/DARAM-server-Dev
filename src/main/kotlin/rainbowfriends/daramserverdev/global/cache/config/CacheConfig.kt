@@ -15,7 +15,7 @@ class CacheConfig {
         cacheManager.setCaffeine(
             newBuilder()
                 .maximumSize(1000)
-                .expireAfterWrite(10, java.util.concurrent.TimeUnit.MINUTES)
+                .expireAfterWrite(2, java.util.concurrent.TimeUnit.MINUTES)
         )
         return cacheManager
     }
