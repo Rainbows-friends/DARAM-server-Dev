@@ -6,15 +6,15 @@ import rainbowfriends.daramserverdev.global.member.enums.Roles
 data class MemberDTO(
     val id: Long? = 0,
     var email: String? = null,
-    val name: String,
-    val grade: Int,
-    val classNum: Int,
-    val number: Int,
-    val floor: Int,
-    val room: Int,
-    val role: Roles,
-    val stay: Boolean = true,
-    val lateNumber: Long = 0
+    var name: String,
+    var grade: Int,
+    var classNum: Int,
+    var number: Int,
+    var floor: Int,
+    var room: Int,
+    var role: Roles,
+    var stay: Boolean = true,
+    var lateNumber: Long = 0
 ) {
     fun toEntity(): Member {
         return Member(
