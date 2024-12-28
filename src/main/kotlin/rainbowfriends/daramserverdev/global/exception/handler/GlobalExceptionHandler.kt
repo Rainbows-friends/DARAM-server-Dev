@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import rainbowfriends.daramserverdev.domain.auth.exception.*
 import rainbowfriends.daramserverdev.domain.member.exception.InvalidStudentIdException
 import rainbowfriends.daramserverdev.domain.member.exception.MemberNotFoundException
+import rainbowfriends.daramserverdev.domain.member.exception.PatchRoomException
 import rainbowfriends.daramserverdev.domain.member.exception.TokenNotFoundException
 import rainbowfriends.daramserverdev.domain.notice.exception.DuplicateNoticeException
 import rainbowfriends.daramserverdev.domain.notice.exception.NoticeNotFoundException
@@ -243,5 +244,15 @@ class GlobalExceptionHandler {
             status = ErrorStatus.ERROR
         )
         return ResponseEntity(errorResponse, HttpStatus.UNAUTHORIZED)
+    }
+
+    @ExceptionHandler(PatchRoomException::class)
+    fun handlePatchRoomException(): ResponseEntity<ErrorResponse> {
+        val errorResponse = ErrorResponse(
+            code = HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            message = "Patch Room failed",
+            status = ErrorStatus.ERROR
+        )
+        return ResponseEntity(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR)
     }
 }
