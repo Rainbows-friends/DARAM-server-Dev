@@ -10,7 +10,7 @@ data class PatchRoomRequest(
     @field:Min(1101)
     val studentId: Short,
     @field:NotNull
-    @field:Max(520)
+    @field:Max(518)
     @field:Min(201)
     val room: Short
 )
