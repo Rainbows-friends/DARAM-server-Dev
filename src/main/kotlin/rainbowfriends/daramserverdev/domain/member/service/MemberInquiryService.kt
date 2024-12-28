@@ -2,7 +2,7 @@ package rainbowfriends.daramserverdev.domain.member.service
 
 import rainbowfriends.daramserverdev.domain.member.dto.response.GetMemberResponse
 
-interface MemberInqueryService {
+interface MemberInquiryService {
     fun getAllMember(
         id: Long?,
         stay: Boolean?,
