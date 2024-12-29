@@ -22,7 +22,7 @@ class LateNumberUpdater(
             val checkIns = checkInRepository.findByCheckinInfoDate(date)
                 .filter { !it.checkinStatus }
             logger().info("Fetched ${checkIns.size} check-ins with checkinStatus = false")
-            val memberIds = checkIns.mapNotNull { it.id }
+            val memberIds = checkIns.mapNotNull { it.user.id }
             logger().info("Extracted member IDs: $memberIds")
             val members = memberRepository.findAllById(memberIds).associateBy { it.id }
             logger().info("Fetched ${members.size} members from memberRepository")
