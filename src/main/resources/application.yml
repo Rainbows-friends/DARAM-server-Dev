@@ -13,9 +13,9 @@ spring:
       ddl-auto: update
     show-sql: true
     properties:
+      jdbc:
+        batch_size: 100
       hibernate:
-        jdbc:
-          batch_size: 50
         dialect: org.hibernate.dialect.MySQLDialect
         order_updates: true
         default_batch_fetch_size: 100
