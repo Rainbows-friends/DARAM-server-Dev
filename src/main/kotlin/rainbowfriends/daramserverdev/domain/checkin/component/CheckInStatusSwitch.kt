@@ -23,9 +23,9 @@ class CheckInStatusSwitch(
 
     private fun handleCheckInStatusSwitch(studentId: Short, date: LocalDate): Boolean {
         return try {
-            val parsedStudentId = parseStudentId(studentId.toString())
-            logger().info("CheckInStatusSwitch: $parsedStudentId")
-            val user = checkInTransaction.getMemberDto(parsedStudentId.first, parsedStudentId.second, parsedStudentId.third)
+            val (grade,classNum,number) = parseStudentId(studentId.toString())
+            logger().info("CheckInStatusSwitch: $grade $classNum $number")
+            val user = checkInTransaction.getMemberDto(grade, classNum, number)
             val checkIn = checkInTransaction.getCheckInRecord(user, date)
             checkInTransaction.checkInDateModify(checkIn)
             checkInTransaction.toggleCheckInStatus(checkIn)
