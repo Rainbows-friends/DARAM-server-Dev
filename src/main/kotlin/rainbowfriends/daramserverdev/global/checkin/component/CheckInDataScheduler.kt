@@ -29,7 +29,7 @@ class CheckInDataScheduler(
         checkInRepository.deleteAll(checkInRepository.findByCheckinInfoDate(cutoffDate))
     }
 
-    @Scheduled(cron = "0 16 22 * * *")
+    @Scheduled(cron = "0 24 22 * * *")
     fun scheduledCheckInDataSync() {
         val today: LocalDate = LocalDate.now()
         val tomorrow: LocalDate = today.plusDays(1)
