@@ -70,7 +70,6 @@ jwt:
   access-token-validity: 60
   refresh-token-validity: 1800
 production:
-  url: ${PROD_URL}
   front-url: ${FRONT_URL}
 server:
   servlet:
