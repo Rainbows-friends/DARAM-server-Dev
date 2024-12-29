@@ -27,7 +27,7 @@ class LateNumberUpdater(
             val members = memberRepository.findAllById(memberIds).associateBy { it.id }
             logger().info("Fetched ${members.size} members from memberRepository")
             checkIns.forEach { checkIn ->
-                val memberId = checkIn.id
+                val memberId = checkIn.user.id
                 val member = members[memberId]
                 if (member == null) {
                     logger().error("Member with ID $memberId not found")
