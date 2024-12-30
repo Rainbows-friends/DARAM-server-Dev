@@ -13,7 +13,7 @@ class CorsConfig(@Value("\${production.front-url}") val productionFrontUrl: Stri
         val config = CorsConfiguration().apply {
             allowCredentials = true
             allowedOrigins = listOf("http://localhost:3000", "http://localhost:5173", productionFrontUrl)
-            allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+            allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
             allowedHeaders = listOf("Authorization", "Content-Type", "Cookie")
         }
         val source = UrlBasedCorsConfigurationSource()
