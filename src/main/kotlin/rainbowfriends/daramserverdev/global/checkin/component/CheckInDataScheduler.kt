@@ -29,14 +29,14 @@ class CheckInDataScheduler(
         checkInRepository.deleteAll(checkInRepository.findByCheckinInfoDate(cutoffDate))
     }
 
-    @Scheduled(cron = "0 55 22 * * *")
+    @Scheduled(cron = "0 40 21 * * SUN-THU")
     fun scheduledCheckInDataSync() {
         val today: LocalDate = LocalDate.now()
         val tomorrow: LocalDate = today.plusDays(1)
-        if (today.dayOfWeek == DayOfWeek.THURSDAY || today.dayOfWeek == DayOfWeek.FRIDAY) {
+        if (today.dayOfWeek != DayOfWeek.THURSDAY) {
+            checkInPreparation.prepareCheckInsForDate(tomorrow)
             return
         }
-        checkInPreparation.prepareCheckInsForDate(tomorrow)
         lateNumberUpdater.lateNumberRaise(today)
     }
 }
